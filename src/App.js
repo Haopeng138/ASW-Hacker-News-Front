@@ -9,23 +9,34 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
 import Profile from "./components/user/Profile";
-import APIservice from "./service/APIservice";
+import APIService from "./service/APIservice"
 class App extends Component {
+constructor(props) {
+    super(props);
 
-  some(){
-    APIservice.get("users/1").then(
-        response => {
-            console.log(response.data)
-            return response.data})
-        
-  }
-  render() {
-    const a = this.some()
-    const user = {
-        "user": "Usuario Nombre",
-        "text": "El about ",
+    this.state = {
+        loading: true,
+        user: {}
+    };
     }
+    componentDidMount() {
+        APIService.get('users/').then(
+          response => {
+            this.setState({
+              user: response.data,
+              loading: false,
+            });
+          }
+        );
+    }
+    
+  render() {
+    const { loading, user } = this.state;
     return (
+        loading ?
+        <>
+        </> :
+        <>
         <div class="content">
         <Navbar bg="light" expand="lg">
         <Container>
@@ -41,7 +52,7 @@ class App extends Component {
             </Navbar.Collapse>
             <Nav>
                 <Nav.Link href="/profile">
-                    User {a}
+                     { user[0].username } ({ user[0].karma })
                 </Nav.Link>
             </Nav>
         </Container>
@@ -49,11 +60,11 @@ class App extends Component {
         <BrowserRouter>
         <Routes>
             <Route path="/"> </Route>
-            <Route path="/profile" element={<Profile user={user}/>}></Route>
+            <Route path="/profile" element={<Profile user={user[0]}/>}></Route>
         </Routes>
         </BrowserRouter>
         </div>
-        
+        </>
     );
   }
 }

@@ -7,13 +7,13 @@ export default class Profile extends Component {
             <Card >
                 <Card.Body>
                 <Card.Text>
-                    Usuario : {this.props.user.user}
+                    Usuario : {this.props.user.username}
                 </Card.Text>
                 <Card.Text>
-                    Karma : {this.props.user.text}
+                    Karma : {this.props.user.karma}
                 </Card.Text>
                 <Card.Text>
-                    About : {this.props.user.text}
+                    About : {this.props.user.about}
                 </Card.Text>
                 <Card.Link href="#">upvote comments</Card.Link>
                 <br></br>

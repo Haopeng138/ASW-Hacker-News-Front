@@ -1,11 +1,12 @@
 import axios from "axios";
 
 const API_URL = "http://haopeng138.pythonanywhere.com/api/";
-const token = 'Api-Key 1GvUruu9.PxcxczPdF8kABAEdj27jdMapvj3U7p53';
+const token = 'Api-Key kk6BAyRE.PNCeVkyh1GTsPBuqKl0HYz2qVfQZ5Mmj';
 const headers = {
     Accept: 'application/json',
     Authorization: token,
 }
+
 
 class APIService {
     get(route) {
