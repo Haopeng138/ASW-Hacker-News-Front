@@ -9,9 +9,22 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
 import Profile from "./components/user/Profile";
+import APIservice from "./service/APIservice";
 class App extends Component {
+
+  some(){
+    APIservice.get("users/1").then(
+        response => {
+            console.log(response.data)
+            return response.data})
+        
+  }
   render() {
-  
+    const a = this.some()
+    const user = {
+        "user": "Usuario Nombre",
+        "text": "El about ",
+    }
     return (
         <div class="content">
         <Navbar bg="light" expand="lg">
@@ -28,17 +41,15 @@ class App extends Component {
             </Navbar.Collapse>
             <Nav>
                 <Nav.Link href="/profile">
-                    User
+                    User {a}
                 </Nav.Link>
             </Nav>
         </Container>
         </Navbar>
-   
-
         <BrowserRouter>
         <Routes>
             <Route path="/"> </Route>
-            <Route path="/profile" element={<Profile/>}></Route>
+            <Route path="/profile" element={<Profile user={user}/>}></Route>
         </Routes>
         </BrowserRouter>
         </div>
