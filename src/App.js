@@ -37,7 +37,7 @@ constructor(props) {
         <>
         </> :
         <>
-        <div class="content">
+        <div>
         <Navbar bg="light" expand="lg">
         <Container>
             <Navbar.Brand href="/">Hacker News</Navbar.Brand>

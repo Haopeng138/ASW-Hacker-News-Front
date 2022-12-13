@@ -10,7 +10,6 @@ const headers = {
 
 class APIService {
     get(route) {
-        console.log(API_URL + route, { headers: headers })
         return axios.get(API_URL + route, { headers: headers });
     }
     
