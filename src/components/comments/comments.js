@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+
 export default class comments extends Component {
     // {
     //     "id": 1,
@@ -25,7 +26,7 @@ export default class comments extends Component {
         };
         return htmlStatus[status];
     }
-    
+
     render() {
         const { comment, on, reply, edit, text, errors, deleteButton } = this.state;
         return(

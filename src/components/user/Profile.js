@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import Card from 'react-bootstrap/Card';
 import APIservice from "../../service/APIservice";
-
+import MakeComment from "../comments/MakeComment";
 // import Input from 'react-validation/build/input';
 export default class Profile extends Component {
     constructor(props){
@@ -21,7 +21,6 @@ export default class Profile extends Component {
     }
 
     handleSubmit(event) {
-        alert('A name was submitted: ' + this.state.about);
         event.preventDefault();
         const putData = {
             "about" : this.state.about
@@ -81,7 +80,7 @@ export default class Profile extends Component {
                     </Card.Body>
                 </Card>
             </form>
-            
+            <MakeComment postid={1}/>
 
             </>
         );
