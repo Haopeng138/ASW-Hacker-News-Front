@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const API_URL = "http://haopeng138.pythonanywhere.com/api/";
-const token = 'Api-Key kk6BAyRE.PNCeVkyh1GTsPBuqKl0HYz2qVfQZ5Mmj';
+const API_URL = "http://marcduch.pythonanywhere.com/api/";
+const token = 'Api-Key SD7s1ikX.43gI6JPM9AEuL4HfZqjqsniGPBW7HIXf';
 const headers = {
     Accept: 'application/json',
     Authorization: token,

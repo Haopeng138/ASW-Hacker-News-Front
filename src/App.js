@@ -7,32 +7,40 @@ import "./App.css";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import Form from 'react-bootstrap/Form';
 
-import Profile from "./components/user/Profile";
-
-import APIService from "./service/APIservice"
+import User from "./views/User";
+import APIService from "./service/APIservice";
+import Submit from "./components/post/Submit";
 class App extends Component {
 constructor(props) {
     super(props);
-
+    this.change = this.change.bind(this)
     this.state = {
         loading: true,
-        user: {}
+        users: {},
+        selectUser : 0
     };
     }
     componentDidMount() {
         APIService.get('users/').then(
           response => {
             this.setState({
-              user: response.data,
+              users: response.data,
               loading: false,
             });
+            console.log(response.data);
           }
         );
     }
+
+    change(event){
+      this.setState({selectUser : event.target.value});
+    }
     
   render() {
-    const { loading, user } = this.state;
+    const { loading, users } = this.state;
+
     return (
         loading ?
         <>
@@ -48,21 +56,26 @@ constructor(props) {
                     <Nav.Link href="/new">new</Nav.Link>
                     <Nav.Link href="/threads">threads</Nav.Link>
                     <Nav.Link href="/ask">ask</Nav.Link>
-                    <Nav.Link href="/submit">submit</Nav.Link>
+                    <Nav.Link href="/submit">submit </Nav.Link>
+                   
                 </Nav>
             </Navbar.Collapse>
             <Nav>
-                <Nav.Link href="/profile">
-                     { user[0].username } ({ user[0].karma })
-                </Nav.Link>
+              <Nav.Link href="/profile" > {this.state.users[this.state.selectUser].username}({this.state.users[this.state.selectUser].karma})</Nav.Link>
+                    <Form.Select aria-label="Default select example" onChange={this.change} value={this.state.selectUser}>
+                      <option value="0">{users[0].username}</option>
+                      {/* <option value="1">{users[1].username}</option>
+                      <option value="2">{users[2].username}</option> */}
+                    </Form.Select>
             </Nav>
         </Container>
         </Navbar>
         <BrowserRouter>
         <Routes>
+            
             <Route path="/"> </Route>
-            <Route path="/profile" element={<Profile user={user[0]}/>}></Route>
-            <Route path="/submit" element={<Post />}</Route>
+            <Route path="/profile" element={<User UserId={this.state.users[this.state.selectUser].id}/>}></Route>
+            <Route path="/submit" element={<Submit/>}> </Route>
         </Routes>
         </BrowserRouter>
         </div>
