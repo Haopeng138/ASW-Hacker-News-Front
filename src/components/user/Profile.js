@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import Card from 'react-bootstrap/Card';
 import APIservice from "../../service/APIservice";
-// import Form from "react-validation/build/form";
+
 // import Input from 'react-validation/build/input';
 export default class Profile extends Component {
     constructor(props){
@@ -59,7 +59,12 @@ export default class Profile extends Component {
                             Karma : {this.props.user.karma}
                         </Card.Text>
                         <Card.Text>
-                            About : <input type="text" defaultValue={this.props.user.about} onChange={this.handleChange} /> 
+                           <table>
+                                <tr>
+                                    <td valign="top">  About : </td>
+                                    <td>  <textarea cols="60" rows="8" type="text" defaultValue={this.props.user.about} onChange={this.handleChange} />  </td>
+                                </tr>
+                           </table>
                         </Card.Text>
                         <Card.Link href="#">upvote comments</Card.Link>
                         <br></br>
