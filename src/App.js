@@ -9,6 +9,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
 import Profile from "./components/user/Profile";
+
 import APIService from "./service/APIservice"
 class App extends Component {
 constructor(props) {
@@ -61,6 +62,7 @@ constructor(props) {
         <Routes>
             <Route path="/"> </Route>
             <Route path="/profile" element={<Profile user={user[0]}/>}></Route>
+            <Route path="/submit" element={<Post />}</Route>
         </Routes>
         </BrowserRouter>
         </div>
