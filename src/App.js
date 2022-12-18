@@ -16,22 +16,23 @@ constructor(props) {
 
     this.state = {
         loading: true,
-        user: {}
+        users: {}
     };
     }
     componentDidMount() {
         APIService.get('users/').then(
           response => {
             this.setState({
-              user: response.data,
+              users: response.data,
               loading: false,
             });
+            console.log(response.data);
           }
         );
     }
     
   render() {
-    const { loading, user } = this.state;
+    const { loading, users } = this.state;
     return (
         loading ?
         <>
@@ -52,7 +53,7 @@ constructor(props) {
             </Navbar.Collapse>
             <Nav>
                 <Nav.Link href="/profile">
-                     { user[0].username } ({ user[0].karma })
+                     { users[3].username } ({ users[3].karma })
                 </Nav.Link>
             </Nav>
         </Container>
@@ -60,7 +61,7 @@ constructor(props) {
         <BrowserRouter>
         <Routes>
             <Route path="/"> </Route>
-            <Route path="/profile" element={<Profile user={user[0]}/>}></Route>
+            <Route path="/profile" element={<Profile user={users[3]}/>}></Route>
         </Routes>
         </BrowserRouter>
         </div>

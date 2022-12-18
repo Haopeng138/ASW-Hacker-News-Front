@@ -8,6 +8,7 @@ node v18.12.1
 npm 9.2.0
 npm install bootstrap
 npm install react-router-dom
+npm install react-validation
 
 
 ## Available Scripts
