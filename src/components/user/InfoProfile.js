@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { Button } from "react-bootstrap";
+
 import Card from 'react-bootstrap/Card';
-import APIservice from "../../service/APIservice";
+
 // import Form from "react-validation/build/form";
 // import Input from 'react-validation/build/input';
-export default class Profile extends Component {
+export default class InfoProfile extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -17,7 +17,7 @@ export default class Profile extends Component {
 
 
     render() {
-        
+
         return(
             <>
                 <Card >

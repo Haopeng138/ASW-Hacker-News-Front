@@ -60,10 +60,12 @@ export default class Profile extends Component {
                         </Card.Text>
                         <Card.Text>
                            <table>
+                                <tbody>
                                 <tr>
                                     <td valign="top">  About : </td>
                                     <td>  <textarea cols="60" rows="8" type="text" defaultValue={this.props.user.about} onChange={this.handleChange} />  </td>
                                 </tr>
+                                </tbody>
                            </table>
                         </Card.Text>
                         <Card.Link href="#">upvote comments</Card.Link>
