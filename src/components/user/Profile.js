@@ -3,6 +3,7 @@ import { Button } from "react-bootstrap";
 import Card from 'react-bootstrap/Card';
 import APIservice from "../../service/APIservice";
 import MakeComment from "../comments/MakeComment";
+import MakeReply from "../comments/MakeReply";
 // import Input from 'react-validation/build/input';
 export default class Profile extends Component {
     constructor(props){
@@ -81,7 +82,7 @@ export default class Profile extends Component {
                 </Card>
             </form>
             <MakeComment postid={1}/>
-
+            <MakeReply commentId={5}/>
             </>
         );
     }
