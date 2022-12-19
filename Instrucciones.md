@@ -5,9 +5,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Dependencias:
 
 node v18.12.1
+
 npm 9.2.0
+
 npm install bootstrap
+
 npm install react-router-dom
+
 npm install react-validation
 
 
