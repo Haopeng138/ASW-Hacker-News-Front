@@ -12,6 +12,7 @@ import Form from 'react-bootstrap/Form';
 import User from "./views/User";
 import APIService from "./service/APIservice";
 import Submit from "./components/post/Submit";
+import SubmissionList from "./views/SubmissionList";
 class App extends Component {
 constructor(props) {
     super(props);
@@ -73,9 +74,11 @@ constructor(props) {
         <BrowserRouter>
         <Routes>
             
-            <Route path="/"> </Route>
+            <Route path="/" element={<SubmissionList type='vote' />} />
             <Route path="/profile" element={<User UserId={this.state.users[this.state.selectUser].id}/>}></Route>
             <Route path="/submit" element={<Submit/>}> </Route>
+            <Route path='/new' element={<SubmissionList type='new' />} />
+            <Route path='/ask' element={<SubmissionList type='ask' />} /> 
         </Routes>
         </BrowserRouter>
         </div>
