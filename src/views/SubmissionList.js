@@ -35,6 +35,8 @@ export default class SubmissionList extends Component {
             query = '?order_by=insert_date&ascending=false'
         } else if (this.state.type === 'ask'){
             query = '?order_by=insert_date&ascending=false&type=ask'
+        } if (this.state.type === 'vote'){
+            query = '?order_by=votes&ascending=false'
         }
         console.log('submissions/'+query)
         APIservice.get('submissions/' + query).then(response =>{

@@ -74,7 +74,7 @@ constructor(props) {
         <BrowserRouter>
         <Routes>
             
-            <Route path="/"> </Route>
+            <Route path="/" element={<SubmissionList type='vote' />} />
             <Route path="/profile" element={<User UserId={this.state.users[this.state.selectUser].id}/>}></Route>
             <Route path="/submit" element={<Submit/>}> </Route>
             <Route path='/new' element={<SubmissionList type='new' />} />
