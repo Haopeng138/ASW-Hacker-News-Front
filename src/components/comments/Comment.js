@@ -15,6 +15,9 @@ export default class Comment extends Component {
     //     "content": "Aquest es un enllaç a google",
     //     "replyTo": null
     //   }
+
+    /* Vote | Usuario | tiempo | padre | post */
+    /* Content*/
     constructor(props) {
         super(props);
         this.onClickVote = this.onClickVote.bind(this);
@@ -25,14 +28,25 @@ export default class Comment extends Component {
         this.onChangeText = this.onChangeText.bind(this);
     
         this.state = {
-          edit: false,
-          text: props.content,
+          voted: null,
+          user: props.user.username,
+          tiempo: props.insert_date,
+          padre: props.replyTo,
+          post: props.postID,
+          content: props.content,
           errors: {},
-          comment: props.comment,
-          on: props.on === undefined ? true : props.on,
-          reply: props.reply === undefined ? true : props.reply,
-          deleteButton: props.deleteButton === undefined ? true : props.deleteButton
         };
+      }
+
+      componentDidMount() {
+        APIservice.get('comment/' + this.state.selectId +"/").then(
+          response => {
+            this.setState({
+              user: response.data,
+              loading: false
+            });
+          }
+        );
       }
     
       onClickEdit() {
@@ -73,7 +87,6 @@ export default class Comment extends Component {
         const htmlStatus = {
           voted: <div className="titleUser mr-1">&nbsp;&nbsp;&nbsp;&nbsp;</div>,
           unvoted: <div className="title clickable mr-1" onClick={ this.onClickVote }>▲</div>,
-          owner: <span className="titleUser">&nbsp;*&nbsp;&nbsp;</span>
         };
         return htmlStatus[status];
       }
