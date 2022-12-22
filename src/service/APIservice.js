@@ -11,16 +11,26 @@ const API_URL = 'http://127.0.0.1:8000/api/'
 
 
 class APIService {
-
+    
     constructor(token){ 
       this.headers = {
         Accept: 'application/json',
         Authorization: '',
       }
+    
     }
 
     setToken(newT){ console.log('Setting new Token: ' + newT); this.headers.Authorization = 'Api-Key '+ newT }
-
+    renameKey ( obj, oldKey, newKey ) {
+        obj[newKey] = obj[oldKey];
+        delete obj[oldKey];
+    }
+    setContentType(){
+        this.renameKey(this.headers,"Accept","Content-Type")
+    }
+    setAccept(){
+        this.renameKey(this.headers,"Content-Type","Accept")
+    }
     get(route) {
         return axios.get(API_URL + route, { headers: this.headers });
     }
