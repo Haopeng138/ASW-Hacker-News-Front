@@ -35,8 +35,10 @@ export default class PostBanner extends Component{
               <Col>
                 {submission.votes} votes by <NavLink to={'/progfile/'+submission.user.id}> {submission.user.username} </NavLink> {submission.time_from_post} | {submission.numComments} comments
               </Col>
+              <Col>
+                <NavLink to={"/makepostcomment/"+submission.id}> comment </NavLink>
+              </Col>
             </Row>
-
           </Col>
         </Row>
         
