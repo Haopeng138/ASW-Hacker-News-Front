@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import Card from 'react-bootstrap/Card';
 import APIservice from "../../service/APIservice";
-
-// import Input from 'react-validation/build/input';
 export default class Profile extends Component {
     constructor(props){
         super(props);
@@ -21,7 +19,6 @@ export default class Profile extends Component {
     }
 
     handleSubmit(event) {
-        alert('A name was submitted: ' + this.state.about);
         event.preventDefault();
         const putData = {
             "about" : this.state.about
@@ -72,7 +69,7 @@ export default class Profile extends Component {
                         <br></br>
                         <Card.Link href="#">upvote submissions</Card.Link>
                         <br></br>
-                        <Card.Link href="#">user comments</Card.Link>
+                        <Card.Link href="/usercomments">user comments</Card.Link>
                         <br></br>
                         <Card.Link href="#">user submissions</Card.Link>
                         <br></br>
@@ -81,8 +78,6 @@ export default class Profile extends Component {
                     </Card.Body>
                 </Card>
             </form>
-            
-
             </>
         );
     }

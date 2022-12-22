@@ -14,6 +14,10 @@ npm install react-router-dom
 
 npm install react-validation
 
+npm install moment --save 
+
+npm install gh-pages --save-dev 
+
 
 ## Available Scripts
 
