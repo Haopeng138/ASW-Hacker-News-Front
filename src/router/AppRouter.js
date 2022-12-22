@@ -14,7 +14,7 @@ class AppRouter extends Component{
       <>
         <Routes>
             <Route path="/" element={<SubmissionList type='vote' />} />
-            <Route path="/profile" element={<User />}></Route>
+            <Route path="/profile/:userId" element={<User />}></Route>
             <Route path="/submit" element={<Submit/>}> </Route>
             <Route path='/new' element={<SubmissionList type='new' />} />
             <Route path='/ask' element={<SubmissionList type='ask' />} /> 

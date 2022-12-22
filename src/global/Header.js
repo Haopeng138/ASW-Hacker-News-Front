@@ -5,7 +5,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Col from 'react-bootstrap/Col';
 import UserSelector from '../components/user/UserSelector';
 import { NavLink } from 'react-router-dom';
-import APIservice from '../service/APIservice';
+// import APIservice from '../service/APIservice';
 
 class Header extends Component {
   constructor(props){

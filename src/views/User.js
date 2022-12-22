@@ -10,12 +10,18 @@ class User extends Component {
     this.state = {
       user: {},
       loading: true,
-      selectId: props.UserId
     };
   }
 
+  querySelector(){
+    var id = 0
+    id  = parseInt(window.location.pathname.split("/").pop()) 
+    return id
+  }
+
   componentDidMount() {
-    APIservice.get('users/' + this.state.selectId +"/").then(
+    console.log(this.querySelector())
+    APIservice.get('users/' + this.querySelector() +"/").then(
       response => {
         this.setState({
           user: response.data,
