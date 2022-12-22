@@ -35,7 +35,7 @@ export default class InfoProfile extends Component {
                         <Card.Text>
                             About : {this.props.user.about} 
                         </Card.Text>
-                        <Card.Link href="#">user comments</Card.Link>
+                        <Card.Link href={"/usercomments/"+this.state.user.id}>user comments</Card.Link>
                         <br></br>
                         <Card.Link href="#">user submissions</Card.Link>
                         <br></br>

@@ -43,7 +43,6 @@ export default class Profile extends Component {
     }
 
     render() {
-        const commentlink = "/usercomments/1"
         return(
             <>
              <form onSubmit={this.handleSubmit}>
@@ -69,11 +68,11 @@ export default class Profile extends Component {
                                 </tbody>
                            </table>
                         </Card.Text>
-                        <Card.Link href="/upvotecomments">upvote comments</Card.Link>
+                        <Card.Link href={"/upvotecomments/"+this.state.user.id}>upvote comments</Card.Link>
                         <br></br>
                         <Card.Link href="#">upvote submissions</Card.Link>
                         <br></br>
-                        <Card.Link href={commentlink}>user comments</Card.Link>
+                        <Card.Link href={"/usercomments/"+this.state.user.id}>user comments</Card.Link>
                         <br></br>
                         <Card.Link href="/submission">user submissions</Card.Link>
                         <br></br>

@@ -21,12 +21,20 @@ export default class CommentBanner extends Component{
         console.log(JSON.stringify(props.comment))
         this.state = {
             comment: props.comment,
-            loaded : true
+            loaded : false,
+            postTitle: null
         }
         this.update = this.update.bind(this)
     }
-
-
+    componentDidMount(){
+        APIservice.get('submissions/'+this.state.comment.postID+'/').then(response => {
+          this.setState({
+            postTitle: response.data.title,
+            loaded: true
+          })
+        })
+      }
+    
     update(){
         this.setState({comment: this.state.comment, loaded:false})
         APIservice.get('comments/'+this.state.comment.id+'/').then( (response) => this.setState({comment: response.data, loaded: true}))
@@ -34,10 +42,9 @@ export default class CommentBanner extends Component{
 
     render()
     {
-        const {comment, loaded} = this.state
+        const {comment, loaded,postTitle} = this.state
         if (!loaded) return <p> Cargando..</p>
         return<>
-      
             <Row xs={10} lg={10}>
                 <Col xs={1} style={{width:'35px'}}> <VoteButton update={this.update} id={comment.id} type='comment' /> </Col>
                 <Col>
@@ -46,19 +53,18 @@ export default class CommentBanner extends Component{
                             <NavLink className='commentTitle' to={'/comments/'+comment.id} style={{ color: 'black', textDecoration: 'none' }}> {comment.user.username} </NavLink>
                         </Col>
                         <Col>
-                            {comment.user.username}
                             {/* {APIservice.get('comments/'+this.state.comment.id+'/').then((response) => this.state.comment.insert_date)} */}
-                            <NavLink className='commentParent' to={'/comments/'+APIservice.get('comments/'+this.state.comment.id+'/').then((response) => this.state.comment.replyTo)}> {comment.text} </NavLink>
-                            | on: {comment.text}
+                            | <NavLink className='commentParent' to={'/comments/'+APIservice.get('comments/'+this.state.comment.id+'/').then((response) => this.state.comment.replyTo)}> on: {postTitle}  </NavLink>
                         </Col>
                     </Row>
                     <Row>
-
+                        <Col>
+                         {comment.content}
+                        </Col>
                     </Row>
 
                 </Col>
             </Row>
-
         </>
 
     }

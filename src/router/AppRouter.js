@@ -20,6 +20,7 @@ class AppRouter extends Component{
             <Route path='/new' element={<SubmissionList type='new' />} />
             <Route path='/ask' element={<SubmissionList type='ask' />} /> 
             <Route path='/usercomments/:userId' element={<UserComments/>}> </Route>
+            <Route path='/upvotecomments/:userId' element={<UserComments type="upvoted"/>}> </Route>
             <Route element={PageNotFound} />
         </Routes>
       </>

@@ -27,7 +27,9 @@ export default class UserComments extends Component {
     componentDidMount(){
         //console.log('submissions/'+this.queryParams())
         const params = new URLSearchParams(window.location.pathname);
-        APIservice.get('users/'+1+'/comments' + this.queryParams()).then(response =>{
+        console.log(params.values)
+        const id = params.get('userID')
+        APIservice.get('users/'+id+'/comments' + this.queryParams()).then(response =>{
             console.log(JSON.stringify(response.data))
             this.setState({
                 comments: response.data,
