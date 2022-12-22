@@ -5,6 +5,7 @@ import PageNotFound from "../views/NotFound";
 import User from "../views/User";
 import Submit from "../components/post/Submit";
 import SubmissionList from "../views/SubmissionListPage";
+import UserComments from "../views/CommentListPage";
 
 class AppRouter extends Component{
 
@@ -18,6 +19,7 @@ class AppRouter extends Component{
             <Route path="/submit" element={<Submit/>}> </Route>
             <Route path='/new' element={<SubmissionList type='new' />} />
             <Route path='/ask' element={<SubmissionList type='ask' />} /> 
+            <Route path='/usercomments/:userId' element={<UserComments/>}> </Route>
             <Route element={PageNotFound} />
         </Routes>
       </>

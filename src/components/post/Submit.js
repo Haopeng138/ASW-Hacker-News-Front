@@ -77,7 +77,7 @@ export default class Submit extends Component {
                             Title :  <input type="text" name="name" onChange={this.handleChangeTitle}/>
                         </Card.Text>
                         <Card.Text>
-                            Url   :  <input type="text" name="name" onChange={this.handleChangeUrl} />
+                            Url  :  <input type="text" name="name" onChange={this.handleChangeUrl} />
                         </Card.Text>
                         <Card.Text>
                            <table>
