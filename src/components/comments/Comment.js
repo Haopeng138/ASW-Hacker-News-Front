@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import APIservice from "../../service/APIservice";
-import Moment from "moment";
 import Form from "react-validation/build/form";
 import CheckButton from "react-validation/build/button";
 export default class Comment extends Component {

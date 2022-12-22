@@ -67,11 +67,11 @@ export default class Profile extends Component {
                         </Card.Text>
                         <Card.Link href="#">upvote comments</Card.Link>
                         <br></br>
-                        <Card.Link href="#">upvote submissions</Card.Link>
+                        <Card.Link href="/userUpvotes/#/?userId=this.state.user">upvote submissions</Card.Link>
                         <br></br>
                         <Card.Link href="/usercomments">user comments</Card.Link>
                         <br></br>
-                        <Card.Link href="#">user submissions</Card.Link>
+                        <Card.Link href="/userPosts/#/?userId=this.state.user">user submissions</Card.Link>
                         <br></br>
                         <br></br>
                         <Button  type="submit"> Update </Button>
