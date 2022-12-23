@@ -38,7 +38,7 @@ class User extends Component {
         return <Cargando />
     }
     
-    if (this.props.router.params.userId != this.state.user.id){
+    if (this.props.router.params.userId !== this.state.user.id){
       this.setState({loading:true})
       return <Cargando />
     }

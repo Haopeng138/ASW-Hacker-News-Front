@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import VoteButton from '../VoteButton'
 import {NavLink} from "react-router-dom";
 import APIservice from "../../service/APIservice";

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import APIservice from "../../service/APIservice";
-import { Button, Col, Collapse, Row } from "react-bootstrap";
+import { Button, Col, Row } from "react-bootstrap";
 
 export default class MakeReply extends Component {
     constructor(props){

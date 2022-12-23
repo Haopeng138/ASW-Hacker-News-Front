@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import Card from 'react-bootstrap/Card';
 import APIservice from "../../service/APIservice";
-import {Navigate, Redirect} from 'react-router-dom'
+import {Navigate} from 'react-router-dom'
 
 // import Input from 'react-validation/build/input';
 export default class Submit extends Component {
@@ -40,7 +40,7 @@ export default class Submit extends Component {
 
     handleSubmit(event) {
 
-        alert('A name was submitted: ' + this.state.title);
+        
         const putData = {
             "title" : this.state.title,
             "url" : this.state.url,
@@ -55,11 +55,13 @@ export default class Submit extends Component {
                 errors: {},
                 message: 'Updated!'
               });
+              alert('A name was submitted: ' + this.state.title);
             }, error => {
               this.setState({
                 errors: error.response.data.errors,
                 message: ''
               });
+              alert('Url repetido');
             }
           );
         APIservice.setAccept();

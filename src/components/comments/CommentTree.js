@@ -26,7 +26,9 @@ class CommentTree extends Component{
   }
 
   render(){
-    const {postid, comments, loaded} = this.state;
+    const comments = this.state.comments;
+    const loaded = this.state.loaded;
+    //const {postid, comments, loaded} = this.state;
     if (!loaded){
       console.log('Comment Tree not loaded')
       return <Cargando />

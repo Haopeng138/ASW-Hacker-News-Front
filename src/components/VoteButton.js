@@ -21,7 +21,7 @@ export default class UpvoteButton extends Component{
 
   onClick(event){
     console.log('Click!')
-    var path = this.pathFromType
+    //var path = this.pathFromType
     APIservice.put(this.pathFromType+this.state.id+'/vote').then( (response) => {
       this.props.update()
     })
@@ -31,7 +31,7 @@ export default class UpvoteButton extends Component{
 
     return (
       <button onClick={this.onClick} >
-        <img src={Upvote} style={{bg:null, width:'10px', height:'10px', border:'0px', margin:'3px 2px 6px'}} />
+        <img src={Upvote} alt="buton"style={{bg:null, width:'10px', height:'10px', border:'0px', margin:'3px 2px 6px'}} />
       </button>
     )
   }

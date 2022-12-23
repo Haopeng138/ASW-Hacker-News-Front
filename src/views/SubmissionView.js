@@ -45,7 +45,7 @@ class SubmissionView extends Component{
           <Row xs='auto' style={{padding:'1px 1px 1px'}}>
               <p className='postTitle'> {submission.title} </p> {submission.site != null? <a href={submission.url}> ({submission.site}) </a> : null} 
           </Row>
-          {submission.text != undefined && <Row>
+          {submission.text !== undefined && <Row>
             <p className="postText"> {submission.text} </p>
           </Row>}
           <Row>

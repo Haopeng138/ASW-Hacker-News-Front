@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import APIservice from '../service/APIservice';
-import CommentBanner from '../components/comments/CommentBanner';
 import { Row, Container } from 'react-bootstrap';
 import PostBanner from '../components/post/PostBanner';
 
