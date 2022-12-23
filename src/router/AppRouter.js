@@ -26,6 +26,7 @@ class AppRouter extends Component{
           <Route path="/profile/:userId" element={<User selectedUserID={this.props.userId} />}></Route>
           <Route path='/profile/:userId/comments' element={<UserComments/>}> </Route>
           <Route path='/profile/:userId/comments?upvoted' element={<UserComments type="upvoted"/>}> </Route>
+          <Route path='/upvotecomments/:userId' element={<UserComments type="upvoted"/>}> </Route>
           <Route path='/submissions/:postId' element={<SubmissionView />}></Route>
           <Route path='/submissions/:postId/comments' element={<PostComentListPage />}></Route>
           <Route path='/makepostcomment/:posId' element={<CommentPost/>}> </Route>

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Col, Row } from "react-bootstrap";
+import { Button, Col, Row } from "react-bootstrap";
 import VoteButton from '../VoteButton'
 import {NavLink} from "react-router-dom";
 import APIservice from "../../service/APIservice";
@@ -13,6 +13,7 @@ export default class PostBanner extends Component{
         submission: props.submission,
         loaded : true
       }
+      this.handleClik = this.handleClik.bind(this)
       this.update = this.update.bind(this)
     }
 
@@ -21,6 +22,9 @@ export default class PostBanner extends Component{
       APIservice.get('submissions/'+this.state.submission.id+'/').then( (response) => this.setState({submission: response.data, loaded: true}))
     }
 
+    handleClik(){
+      APIservice.delete('submissions/'+this.state.submission.id+'/').then((response)=> alert("Submission deleted"))
+    }
     render()
     { 
       const {submission, loaded} = this.state
@@ -34,7 +38,8 @@ export default class PostBanner extends Component{
             </Row>
             <Row>
               <Col>
-                {submission.votes} votes by <NavLink to={'/profile/'+submission.user.id}> {submission.user.username} </NavLink> {submission.time_from_post} |  <NavLink to={"/submissions/"+submission.id}> {submission.numComments} comments </NavLink>
+                {submission.votes} votes by <NavLink to={'/profile/'+submission.user.id}> {submission.user.username} </NavLink> {submission.time_from_post} |  <NavLink to={"/submissions/"+submission.id}> {submission.numComments} comments </NavLink> | <Button onClick={this.handleClik}> delete</Button>
+              
               </Col>
             </Row>
           </Col>
