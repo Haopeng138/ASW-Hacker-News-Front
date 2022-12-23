@@ -3,67 +3,80 @@ import { Col, Container, Row } from "react-bootstrap";
 import VoteButton from '../VoteButton'
 import {NavLink} from "react-router-dom";
 import APIservice from "../../service/APIservice";
+import Cargando from "../Cargando";
+import MakeReply from "./MakeReply";
 
 export default class CommentBanner extends Component{
-    // {
-    //     "id": 1,
-    //     "postID": 1,
-    //     "user": {
-    //       "id": 1,
-    //       "username": "Usuario 1"
-    //     },
-    //     "insert_date": "2022-12-16T15:31:31.312937Z",
-    //     "content": "Aquest es un enllaç a google",
-    //     "replyTo": null
-    //   }
     constructor(props){
         super(props);
-        console.log(JSON.stringify(props.comment))
         this.state = {
             comment: props.comment,
             loaded : false,
-            postTitle: null
+            postTitle: props.postTitle,
+            on: props.on === undefined ? true : props.on,
+            replies: []
         }
         this.update = this.update.bind(this)
+        console.log('CommentBanner ' + props.comment.id)
     }
+
     componentDidMount(){
+      if(this.state.on === true && this.state.postTitle === undefined){
         APIservice.get('submissions/'+this.state.comment.postID+'/').then(response => {
+          console.log('Getting replies for comment banner',this)
           this.setState({
             postTitle: response.data.title,
+            loaded: true
+          })    
+        })
+      }
+      else {
+        APIservice.get('submissions/'+this.state.comment.postID+'/comments').then(response => {
+          console.log('Getting replies for comment banner',this)
+          this.setState({
+            replies: response.data.filter( comment => comment.replyTo === this.state.comment.id ),
             loaded: true
           })
         })
       }
-    
+
+    }
+
     update(){
-        this.setState({comment: this.state.comment, loaded:false})
+        console.log('updating commentBanner ' + this.props.comment.id)
         APIservice.get('comments/'+this.state.comment.id+'/').then( (response) => this.setState({comment: response.data, loaded: true}))
     }
 
     render()
     {
-        const {comment, loaded,postTitle} = this.state
-        if (!loaded) return <p> Cargando..</p>
+        const {comment, loaded,postTitle, replies} = this.state
+        if (!loaded){
+          return <Cargando />
+        }
+        console.log('Rendering banner for comment ' + comment.id)
+
         return<>
             <Row xs={10} lg={10}>
-                <Col xs={1} style={{width:'35px'}}> <VoteButton update={this.update} id={comment.id} type='comment' /> </Col>
-                <Col>
-                    <Row xs='auto' style={{padding:'1px 1px 1px'}}>
-                        <Col>
-                            <NavLink className='commentTitle' to={'/comments/'+comment.id} style={{ color: 'black', textDecoration: 'none' }}> {comment.user.username} </NavLink>
-                        </Col>
-                        <Col>
-                            {/* {APIservice.get('comments/'+this.state.comment.id+'/').then((response) => this.state.comment.insert_date)} */}
-                            | <NavLink className='commentParent' to={'/comments/'+APIservice.get('comments/'+this.state.comment.id+'/').then((response) => this.state.comment.replyTo)}> on: {postTitle}  </NavLink>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                         {comment.content}
-                        </Col>
-                    </Row>
-
-                </Col>
+              <Col xs={1} style={{width:'35px'}}> <VoteButton update={this.update} id={comment.id} type='comment' /> </Col>
+              <Col>
+                <Row xs='auto' style={{padding:'1px 1px 1px'}}>
+                    <Col>
+                        <NavLink to={'/profile/'+comment.user.id}>{comment.user.username}</NavLink>
+                    </Col>
+                    {this.state.on === true && <Col>
+                    <>| </><NavLink className='postParent' to={'/submissions/'+this.state.comment.postID}> on: {postTitle}  </NavLink>
+                    </Col>}
+                </Row>
+                <Row>
+                    <Col>
+                      {comment.content}
+                    </Col>
+                </Row>
+                {!this.state.on && <Row>
+                  <MakeReply commentId={comment.id} update={this.props.update}/>
+                </Row>}
+                {comment.replies.length > 0 && !this.state.on && replies.map( reply => <CommentBanner key={reply.id} comment={reply} on={this.state.on} update={this.props.update}/>) }
+              </Col>
             </Row>
         </>
 

@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import APIservice from '../service/APIservice';
 import CommentBanner from '../components/comments/CommentBanner';
 import { Row, Container } from 'react-bootstrap';
+import MakeReply from '../components/comments/MakeReply';
+
 
 export default class PostComentListPage extends Component {
 
@@ -48,7 +50,8 @@ export default class PostComentListPage extends Component {
       return <>
         <Container>
             { comments.map((comment) => 
-              <Row key={comment.id}> <CommentBanner comment={comment} /> </Row>) }
+              <Row key={comment.id}> <CommentBanner comment={comment} /> 
+              <MakeReply /> </Row>) }
         </Container>
       </>
     }

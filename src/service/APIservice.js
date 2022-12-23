@@ -1,8 +1,8 @@
 import axios from "axios";
 
-//const API_URL = "http://marcduch.pythonanywhere.com/api/";
-const API_URL = 'http://127.0.0.1:8000/api/'
-// var token = 'Api-Key SD7s1ikX.43gI6JPM9AEuL4HfZqjqsniGPBW7HIXf';
+const API_URL = "http://marcduch.pythonanywhere.com/api/";
+//const API_URL = 'http://127.0.0.1:8000/api/'
+// var token = 'Api-Key F3H5Jp7x.Jgp0de4aTKOp6n1S4bENIFYeaW7myi7l';
 
 // var headers = {
 //     Accept: 'application/json',

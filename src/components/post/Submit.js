@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import Card from 'react-bootstrap/Card';
 import APIservice from "../../service/APIservice";
+import {Navigate, Redirect} from 'react-router-dom'
 
 // import Input from 'react-validation/build/input';
 export default class Submit extends Component {
@@ -16,7 +17,8 @@ export default class Submit extends Component {
             message: '',
             title:'',
             url:'',
-            text:''
+            text:'',
+            submitted: false
         };
         
     }
@@ -61,41 +63,43 @@ export default class Submit extends Component {
             }
           );
         APIservice.setAccept();
+        this.setState({submitted: true})
     }
 
     render() {
-        return(
-            <>
-             <form onSubmit={this.handleSubmit}>
-                <Card >
-                    <Card.Body>
-                        {this.props.errors}
-                        <br>
-                        </br>
-                        {this.props.message}
-                        <Card.Text>
-                            Title :  <input type="text" name="name" onChange={this.handleChangeTitle}/>
-                        </Card.Text>
-                        <Card.Text>
-                            Url  :  <input type="text" name="name" onChange={this.handleChangeUrl} />
-                        </Card.Text>
-                        <Card.Text>
-                           <table>
-                                <tbody>
-                                <tr>
-                                    <td valign="top">  Text : </td>
-                                    <td>  <textarea cols="60" rows="8" type="text"  onChange={this.handleChangeText} />  </td>
-                                </tr>
-                                </tbody>
-                           </table>
-                        </Card.Text>
-                        <Button  type="submit"> Update </Button>
-                    </Card.Body>
-                </Card>
-            </form>
-            
+      if (this.state.submitted) return <Navigate push to='/' />
+      return(
+          <>
+            <form onSubmit={this.handleSubmit}>
+              <Card >
+                  <Card.Body>
+                      {this.props.errors}
+                      <br>
+                      </br>
+                      {this.props.message}
+                      <Card.Text>
+                          Title :  <input type="text" name="name" onChange={this.handleChangeTitle}/>
+                      </Card.Text>
+                      <Card.Text>
+                          Url  :  <input type="text" name="name" onChange={this.handleChangeUrl} />
+                      </Card.Text>
+                      <Card.Text>
+                          <table>
+                              <tbody>
+                              <tr>
+                                  <td valign="top">  Text : </td>
+                                  <td>  <textarea cols="60" rows="8" type="text"  onChange={this.handleChangeText} />  </td>
+                              </tr>
+                              </tbody>
+                          </table>
+                      </Card.Text>
+                      <Button  type="submit"> Update </Button>
+                  </Card.Body>
+              </Card>
+          </form>
+          
 
-            </>
-        );
-    }
+          </>
+      );
+  }
 }  

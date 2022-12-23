@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import Card from 'react-bootstrap/Card';
+import { NavLink } from "react-router-dom";
 import APIservice from "../../service/APIservice";
 
 // import Input from 'react-validation/build/input';
@@ -72,7 +73,7 @@ export default class Profile extends Component {
                         <br></br>
                         <Card.Link href="#">upvote submissions</Card.Link>
                         <br></br>
-                        <Card.Link href={"/usercomments/"+this.state.user.id}>user comments</Card.Link>
+                        <NavLink to={"/usercomments/"+this.state.user.id}>user comments</NavLink>
                         <br></br>
                         <Card.Link href="/submission">user submissions</Card.Link>
                         <br></br>

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import APIservice from "../../service/APIservice";
-import { Button } from "react-bootstrap";
+import { Button, Col, Row } from "react-bootstrap";
 
 export default class MakeComment extends Component {
     constructor(props){
@@ -19,6 +19,7 @@ export default class MakeComment extends Component {
     }
 
     handleSubmit(event) {
+        console.log('Handeling submit')
         event.preventDefault();
         const putData = {
             "content" : this.state.comments
@@ -30,6 +31,7 @@ export default class MakeComment extends Component {
                 errors: {},
                 message: 'Updated!'
               });
+              this.props.update();
             }, error => {
               this.setState({
                 errors: error.response.data.errors,
@@ -40,11 +42,11 @@ export default class MakeComment extends Component {
 
     }
     render() {
-        return (
-            <form onSubmit={this.handleSubmit}>
-                <textarea cols="60" rows="8" type="text" defaultValue={this.props.postid} onChange={this.handleChange} /> 
-                <Button  type="submit"> Comment </Button>
-            </form>
+      return (
+          <form onSubmit={this.handleSubmit}>
+              <textarea cols="60" rows="8" type="text" defaultValue='' onChange={this.handleChange} /> 
+              <Row> <Col span={2}> <Button size='sm' type="submit" style={{align:'center'}}> Reply </Button> </Col></Row> 
+          </form>
            
         );
     }

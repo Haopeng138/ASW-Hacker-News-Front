@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter} from 'react-router-dom'
+import { BrowserRouter, createBrowserRouter} from 'react-router-dom'
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import "./App.css";
@@ -17,31 +17,20 @@ constructor(props) {
     };
     this.changeUser = this.changeUser.bind(this)
   }
-  componentDidMount() {
-    APIService.get('users/').then(
-      response => {
-        this.setState({
-          users: response.data,
-          loading: false,
-        });
-        console.log(response.data);
-      }
-    );
+
+  changeUser(user){
+    if (user != null) console.log("App has recieved the change " + user.id)
+    this.setState({selectedUser: user})
+    //this.setState({selectUser : event.target.value});
   }
 
-    changeUser(user){
-      if (user != null) console.log("App has recieved the change " + user.id)
-      this.setState({selectedUser: user})
-      //this.setState({selectUser : event.target.value});
-    }
-
     render(){
-
+      console.log(this.state.selectedUser)
       return(
         <BrowserRouter>
           <Header onUserChange={this.changeUser} />
           <main>
-            <AppRouter />
+            <AppRouter userId={this.state.selectedUser == null ? null: this.state.selectedUser.id } />
           </main>
         </BrowserRouter>
       )

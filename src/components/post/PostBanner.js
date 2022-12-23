@@ -3,27 +3,28 @@ import { Col, Container, Row } from "react-bootstrap";
 import VoteButton from '../VoteButton'
 import {NavLink} from "react-router-dom";
 import APIservice from "../../service/APIservice";
+import Cargando from "../Cargando";
 
 export default class PostBanner extends Component{
     
     constructor(props){
-        super(props);
-        this.state = {
-            submission: props.submission,
-            loaded : true
-        }
-        this.update = this.update.bind(this)
+      super(props);
+      this.state = {
+        submission: props.submission,
+        loaded : true
+      }
+      this.update = this.update.bind(this)
     }
 
     update(){
-      this.setState({submission: this.state.submission, loaded:false})
+      this.setState({ loaded:false})
       APIservice.get('submissions/'+this.state.submission.id+'/').then( (response) => this.setState({submission: response.data, loaded: true}))
     }
 
     render()
     { 
       const {submission, loaded} = this.state
-      if (!loaded) return <p> Cargando..</p>
+      if (!loaded) return <Cargando />
       return<>
         <Row xs={10} lg={10}>
           <Col xs={1} style={{width:'35px'}}> <VoteButton update={this.update} id={submission.id} type='post' /> </Col>
@@ -33,10 +34,10 @@ export default class PostBanner extends Component{
             </Row>
             <Row>
               <Col>
-                {submission.votes} votes by <NavLink to={'/progfile/'+submission.user.id}> {submission.user.username} </NavLink> {submission.time_from_post} | {submission.numComments} comments
+                {submission.votes} votes by <NavLink to={'/profile/'+submission.user.id}> {submission.user.username} </NavLink> {submission.time_from_post} | {submission.numComments} comments
               </Col>
               <Col>
-                <NavLink to={"/makepostcomment/"+submission.id}> comment </NavLink>
+                <NavLink to={"/submissions/"+submission.id}> comment </NavLink>
               </Col>
             </Row>
           </Col>

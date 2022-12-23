@@ -2,12 +2,19 @@ import React, {Component} from 'react';
 import APIservice from '../service/APIservice';
 import CommentBanner from '../components/comments/CommentBanner';
 import { Row, Container } from 'react-bootstrap';
+import { useParams } from "react-router";
+import Cargando from '../components/Cargando';
 
-export default class UserComments extends Component {
+function withParams(Component) {
+  return props => <Component {...props} params={useParams()} />;
+}
+
+class UserComments extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            // userID: this.props.userID
             comments: [],
             loaded: false,
             type: props.type,
@@ -24,11 +31,17 @@ export default class UserComments extends Component {
         return query;
     }
 
+    getCommentsFromUser(id){
+      
+    }
+
     componentDidMount(){
         //console.log('submissions/'+this.queryParams())
         const params = new URLSearchParams(window.location.pathname);
         console.log(params.values)
-        const id = params.get('userID')
+        // const id = params.get('userId')
+        var id = this.props.params.userId;
+        console.log(id)
         APIservice.get('users/'+id+'/comments' + this.queryParams()).then(response =>{
             console.log(JSON.stringify(response.data))
             this.setState({
@@ -41,11 +54,7 @@ export default class UserComments extends Component {
 
     render(){
       const {  comments ,loaded} = this.state
-      if (!loaded){ return <> 
-        <div style={{display: 'flex', justifyContent: 'center', marginTop: '200px' }}>
-          Cargando ...
-        </div>
-      </> }
+      if (!loaded){ return <Cargando /> }
       return <>
         <Container>
             { comments.map((comment) => 
@@ -55,3 +64,5 @@ export default class UserComments extends Component {
     }
 
 }
+
+export default withParams(UserComments);

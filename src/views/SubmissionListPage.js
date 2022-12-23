@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import APIservice from '../service/APIservice';
 import PostBanner from '../components/post/PostBanner';
 import { Row, Container } from 'react-bootstrap';
+import Cargando from '../components/Cargando';
 
 export default class SubmissionListPage extends Component {
 
@@ -12,8 +13,7 @@ export default class SubmissionListPage extends Component {
             loaded: false,
             type: props.type,
         }
-        console.log('cons')
-    }
+      }
 
     queryParams(){
         var path = window.location.pathname
@@ -26,22 +26,22 @@ export default class SubmissionListPage extends Component {
 
     componentDidMount(){
         //console.log('submissions/'+this.queryParams())
-        APIservice.get('submissions/' + this.queryParams()).then(response =>{
-            this.setState({
-                submissions: response.data,
-                loaded: true,
-            })
-        });
+        
     }
 
 
     render(){
       const { loaded, submissions } = this.state
-      if (!loaded){ return <> 
-        <div style={{display: 'flex', justifyContent: 'center', marginTop: '200px' }}>
-          Cargando ...
-        </div>
-      </> }
+      if (!loaded)
+      {
+        APIservice.get('submissions/' + this.queryParams()).then(response =>{
+          this.setState({
+            submissions: response.data,
+            loaded: true,
+          })
+        });
+        return <Cargando />
+      }
       return <>
         <Container>
             { submissions.map((submission) => 

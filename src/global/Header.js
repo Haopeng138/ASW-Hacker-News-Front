@@ -31,8 +31,8 @@ class Header extends Component {
               <Container>
                 <Nav className="me-auto">
                   <Col><NavLink to="/new">			new</NavLink></Col>
-                  <Col><NavLink to="/threads">	threads</NavLink></Col>
                   <Col><NavLink to="/ask">			ask</NavLink></Col>
+                  <Col><NavLink to="/threads">	threads</NavLink></Col>
                   <Col><NavLink to="/submit">	submit </NavLink></Col>
                 </Nav>
               </Container>
