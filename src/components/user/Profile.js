@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import Card from 'react-bootstrap/Card';
+import { NavLink } from "react-router-dom";
 import APIservice from "../../service/APIservice";
+
+// import Input from 'react-validation/build/input';
 export default class Profile extends Component {
     constructor(props){
         super(props);
@@ -19,6 +22,7 @@ export default class Profile extends Component {
     }
 
     handleSubmit(event) {
+        alert('A name was submitted: ' + this.state.about);
         event.preventDefault();
         const putData = {
             "about" : this.state.about
@@ -65,19 +69,21 @@ export default class Profile extends Component {
                                 </tbody>
                            </table>
                         </Card.Text>
-                        <Card.Link href="#">upvote comments</Card.Link>
+                        <Card.Link href={"/upvotecomments/"+this.state.user.id}>upvote comments</Card.Link>
                         <br></br>
-                        <Card.Link href="/userUpvotes/#/?userId=this.state.user">upvote submissions</Card.Link>
+                        <Card.Link href="#">upvote submissions</Card.Link>
                         <br></br>
-                        <Card.Link href="/usercomments">user comments</Card.Link>
+                        <NavLink to={"/usercomments/"+this.state.user.id}>user comments</NavLink>
                         <br></br>
-                        <Card.Link href="/userPosts/#/?userId=this.state.user">user submissions</Card.Link>
+                        <Card.Link href="/submission">user submissions</Card.Link>
                         <br></br>
                         <br></br>
                         <Button  type="submit"> Update </Button>
                     </Card.Body>
                 </Card>
             </form>
+            
+
             </>
         );
     }

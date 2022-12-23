@@ -1,45 +1,42 @@
 import React, { Component } from "react";
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter} from 'react-router-dom'
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import "./App.css";
+import Header from './global/Header';
+import AppRouter from "./router/AppRouter";
 
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import Form from 'react-bootstrap/Form';
 
-import User from "./views/User";
-import APIService from "./service/APIservice";
-import Submit from "./components/post/Submit";
-import UserComments from "./views/UserComments";
+
 class App extends Component {
 constructor(props) {
     super(props);
-    this.change = this.change.bind(this)
     this.state = {
-        loading: true,
-        users: {},
-        selectUser : 0
+        selectedUser : null
     };
-    }
-    componentDidMount() {
-        APIService.get('users/').then(
-          response => {
-            this.setState({
-              users: response.data,
-              loading: false,
-            });
-            console.log(response.data);
-          }
-        );
-    }
+    this.changeUser = this.changeUser.bind(this)
+  }
 
-    change(event){
-      this.setState({selectUser : event.target.value});
+  changeUser(user){
+    if (user != null) console.log("App has recieved the change " + user.id)
+    this.setState({selectedUser: user})
+    //this.setState({selectUser : event.target.value});
+  }
+
+    render(){
+      console.log(this.state.selectedUser)
+      return(
+        <BrowserRouter>
+          <Header onUserChange={this.changeUser} />
+          <main>
+            <AppRouter userId={this.state.selectedUser == null ? null: this.state.selectedUser.id } />
+          </main>
+        </BrowserRouter>
+      )
+
     }
     
-  render() {
+  /*render() {
     const { loading, users } = this.state;
 
     return (
@@ -65,8 +62,7 @@ constructor(props) {
               <Nav.Link href="/profile" > {this.state.users[this.state.selectUser].username}({this.state.users[this.state.selectUser].karma})</Nav.Link>
                     <Form.Select aria-label="Default select example" onChange={this.change} value={this.state.selectUser}>
                       <option value="0">{users[0].username}</option>
-                      {/* <option value="1">{users[1].username}</option>
-                      <option value="2">{users[2].username}</option> */}
+                      
                     </Form.Select>
             </Nav>
         </Container>
@@ -74,16 +70,17 @@ constructor(props) {
         <BrowserRouter>
         <Routes>
             
-            <Route path="/"> </Route>
+            <Route path="/" element={<SubmissionList type='vote' />} />
             <Route path="/profile" element={<User UserId={this.state.users[this.state.selectUser].id}/>}></Route>
             <Route path="/submit" element={<Submit/>}> </Route>
-            <Route path="/usercomments" element={<UserComments UserId={1}/>}> </Route>
+            <Route path='/new' element={<SubmissionList type='new' />} />
+            <Route path='/ask' element={<SubmissionList type='ask' />} /> 
         </Routes>
         </BrowserRouter>
         </div>
         </>
     );
-  }
+  }*/
 }
 
 export default App;

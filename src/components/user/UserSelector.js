@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import Nav from 'react-bootstrap/Nav'
 import Form from 'react-bootstrap/Form'
 import APIservice from "../../service/APIservice";
 import { Row, Container } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 
 class UserSelector extends Component{
   
@@ -57,9 +57,9 @@ class UserSelector extends Component{
       <Container>
         <Row>
           {selectedUser != null ?
-          <Nav.Link href={"/profile/"+this.state.selectedUser.id}> 
+          <NavLink to={"/profile/"+this.state.selectedUser.id}> 
             <center>{selectedUser.username} ({selectedUser.karma})</center>
-          </Nav.Link> :
+          </NavLink> :
            <center>Select a User</center>}
         </Row>
         <Row>

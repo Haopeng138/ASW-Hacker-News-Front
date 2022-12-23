@@ -5,7 +5,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Col from 'react-bootstrap/Col';
 import UserSelector from '../components/user/UserSelector';
 import { NavLink } from 'react-router-dom';
-import APIservice from '../service/APIservice';
+// import APIservice from '../service/APIservice';
 
 class Header extends Component {
   constructor(props){
@@ -31,8 +31,8 @@ class Header extends Component {
               <Container>
                 <Nav className="me-auto">
                   <Col><NavLink to="/new">			new</NavLink></Col>
-                  <Col><NavLink to="/threads">	threads</NavLink></Col>
                   <Col><NavLink to="/ask">			ask</NavLink></Col>
+                  <Col><NavLink to="/threads">	threads</NavLink></Col>
                   <Col><NavLink to="/submit">	submit </NavLink></Col>
                 </Nav>
               </Container>

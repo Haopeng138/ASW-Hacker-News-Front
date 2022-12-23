@@ -3,31 +3,23 @@ import React, { Component } from "react";
 import APIservice from "../service/APIservice";
 import Profile from "../components/user/Profile";
 import InfoProfile from "../components/user/InfoProfile";
+import withRouter from '../global/withRouter.js'
+import Cargando from "../components/Cargando";
+
 class User extends Component {
   constructor(props) {
     super(props);
-    
+    console.log('Constructing user')
     this.state = {
       user: {},
       loading: true,
-      selectId: props.UserId
     };
   }
 
-  componentDidMount() {
-    APIservice.get('users/' + this.state.selectId +"/").then(
-      response => {
-        this.setState({
-          user: response.data,
-          loading: false
-        });
-      }
-    );
-  }
-
   renderUser(user) {
+    if (this.props.selectedUserID === null) return <InfoProfile user={user} />
     return (
-      user.id === 1 ?
+      user.id === this.props.selectedUserID  ?
         <Profile user={user}/>
       :
         <InfoProfile user={user}/>
@@ -36,15 +28,23 @@ class User extends Component {
 
   render() {
     const { loading, user } = this.state;
-    return (
-      loading ? 
-        <div style={{display: 'flex', justifyContent: 'center', marginTop: '200px' }}>
-          Cargando ...
-        </div>
-      :
-        this.renderUser(user)
-    );
+    console.log(this.props.selectedUserID)
+    if (loading){
+      APIservice.get('users/' + this.props.router.params.userId +"/").then( response => 
+        { this.setState({
+          user: response.data,
+          loading: false
+        }) })
+        return <Cargando />
+    }
+    
+    if (this.props.router.params.userId !== this.state.user.id){
+      this.setState({loading:true})
+      return <Cargando />
+    }
+
+    return ( this.renderUser(user) );
   }
 }
 
-export default User;
+export default withRouter(User);

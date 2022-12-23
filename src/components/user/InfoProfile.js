@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import Card from 'react-bootstrap/Card';
+import { NavLink } from "react-router-dom";
 
 // import Form from "react-validation/build/form";
 // import Input from 'react-validation/build/input';
@@ -30,14 +31,14 @@ export default class InfoProfile extends Component {
                             Usuario : {this.props.user.username}
                         </Card.Text>
                         <Card.Text>
-                            Karma : {this.props.user.karma}
+                            Karma :   {this.props.user.karma}
                         </Card.Text>
                         <Card.Text>
-                            About : {this.props.user.about} 
+                            About :   {this.props.user.about} 
                         </Card.Text>
-                        <Card.Link href="#">user comments</Card.Link>
+                        <NavLink to={"/profile/"+this.state.user.id+'/comments'}>user comments</NavLink>
                         <br></br>
-                        <Card.Link href="#">user submissions</Card.Link>
+                        <Card.Link to={"/profile/"+this.state.user.id+'/submissions'}>user submissions</Card.Link>
                         <br></br>
                         <br></br>
                        
