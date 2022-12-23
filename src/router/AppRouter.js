@@ -12,6 +12,16 @@ import HomePage from "../views/HomePage";
 import AskPage from "../views/AskPage";
 import SubmissionView from "../views/SubmissionView";
 
+const express = require("express");
+const app = express();
+const PORT = process.env.PORT || 3030;
+
+// your code
+
+app.listen(PORT, () => {
+    console.log(`server started on port ${PORT}`);
+});
+
 class AppRouter extends Component{
 
   render(){
