@@ -38,7 +38,7 @@ export default class InfoProfile extends Component {
                         </Card.Text>
                         <NavLink to={"/profile/"+this.state.user.id+'/comments'}>user comments</NavLink>
                         <br></br>
-                        <Card.Link to={"/profile/"+this.state.user.id+'/submissions'}>user submissions</Card.Link>
+                        <NavLink to={"/profile/"+this.state.user.id+'/submissions'}>user submissions</NavLink>
                         <br></br>
                         <br></br>
                        

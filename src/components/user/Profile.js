@@ -69,13 +69,13 @@ export default class Profile extends Component {
                                 </tbody>
                            </table>
                         </Card.Text>
-                        <Card.Link href={"/upvotecomments/"+this.state.user.id}>upvote comments</Card.Link>
+                        <NavLink to={"/upvotecomments/"+this.state.user.id}>upvote comments</NavLink>
                         <br></br>
-                        <Card.Link href="#">upvote submissions</Card.Link>
+                        <NavLink to={"/upvotepost/"+this.state.user.id}>upvote submissions</NavLink>
                         <br></br>
-                        <NavLink to={"/usercomments/"+this.state.user.id}>user comments</NavLink>
+                        <NavLink to={"/profile/"+this.state.user.id+'/comments'}>user comments</NavLink>
                         <br></br>
-                        <Card.Link href="/submission">user submissions</Card.Link>
+                        <NavLink to={"/profile/"+this.state.user.id+'/submissions'}>user submissions</NavLink>
                         <br></br>
                         <br></br>
                         <Button  type="submit"> Update </Button>
