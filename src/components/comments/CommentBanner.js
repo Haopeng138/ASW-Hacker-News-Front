@@ -23,7 +23,7 @@ export default class CommentBanner extends Component{
     componentDidMount(){
       if(this.state.on === true && this.state.postTitle === undefined){
         APIservice.get('submissions/'+this.state.comment.postID+'/').then(response => {
-          console.log('Getting replies for comment banner',this)
+          console.log('Getting post title for comment banner',this)
           this.setState({
             postTitle: response.data.title,
             loaded: true
@@ -31,7 +31,8 @@ export default class CommentBanner extends Component{
         })
       }
       else {
-        APIservice.get('submissions/'+this.state.comment.postID+'/comments').then(response => {
+        console.log('join: ' + this.state.comment.replies.join())
+        APIservice.get('comments/?id='+this.state.comment.replies.join()).then(response => {
           console.log('Getting replies for comment banner',this)
           this.setState({
             replies: response.data.filter( comment => comment.replyTo === this.state.comment.id ),
@@ -61,7 +62,7 @@ export default class CommentBanner extends Component{
               <Col>
                 <Row xs='auto' style={{padding:'1px 1px 1px'}}>
                     <Col>
-                        <NavLink to={'/profile/'+comment.user.id}>{comment.user.username}</NavLink>
+                        <NavLink to={'/profile/'+comment.user.id}>{comment.user.username}</NavLink> | {comment.time_from_post}
                     </Col>
                     {this.state.on === true && <Col>
                     <>| </><NavLink className='postParent' to={'/submissions/'+this.state.comment.postID}> on: {postTitle}  </NavLink>
